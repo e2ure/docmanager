@@ -1,2 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/DocManager"/>
+<Context path="/DocManager">
+    <Resource name="mongodb/MyMongoClient"
+          auth="Container"
+          type="com.mongodb.MongoClient"
+          closeMethod="close"
+          factory="com.mongodb.client.jndi.MongoClientFactory"
+          singleton="true"
+          connectionString="mongodb://eurena:qwe123@localhost:27017/scraper"/>
+</Context>
