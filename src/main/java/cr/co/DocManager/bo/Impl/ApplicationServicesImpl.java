@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ApplicationServicesImpl implements ApplicationService{
     private static final Log log = LogFactory.getLog(ApplicationRepositoryImpl.class);
+    @Autowired
     private ApplicationRepository  applicationRepository;
 
     @Autowired

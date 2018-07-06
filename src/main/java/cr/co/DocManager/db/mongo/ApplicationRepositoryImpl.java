@@ -21,6 +21,7 @@ import org.springframework.util.Assert;
  */
 @Repository
 public class ApplicationRepositoryImpl implements ApplicationRepository{
+    @Autowired
     private final MongoOperations mongoOperations;
     
     @Autowired

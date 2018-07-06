@@ -1,7 +1,6 @@
 package cr.co.DocManager.db.entities;
 
 import java.io.Serializable;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author SOIN
  */
-@Document(collection = "applications")
 public class Application implements Serializable{
     private String objId;
     private int appId;

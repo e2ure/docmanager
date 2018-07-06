@@ -37,11 +37,11 @@ public class ApplicationsViewController{
     }
     
     @GetMapping("/Applications/apps")
-    public List<Application> getApplications(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model){
+    public String getApplications(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model){
         List<Application> apps=applicationService.findAll();
         model.addAttribute("applications",apps);
         /*log.info("Get allUsers");
         return ResponseEntity.ok(applicationService.findAll());*/
-        return apps;
+        return "applications";
     }
 }
