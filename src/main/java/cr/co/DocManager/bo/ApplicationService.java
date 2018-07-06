@@ -7,14 +7,13 @@ package cr.co.DocManager.bo;
 
 import cr.co.DocManager.db.entities.Application;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
  * @author SOIN
  */
 public interface ApplicationService {
-    Optional<List<Application>> findAll();
+    List<Application> findAll();
  
     public Application saveApplication(Application application);
 

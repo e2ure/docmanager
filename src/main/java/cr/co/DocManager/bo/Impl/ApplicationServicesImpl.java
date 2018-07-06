@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,14 +27,15 @@ public class ApplicationServicesImpl implements ApplicationService{
     private static final Log log = LogFactory.getLog(ApplicationRepositoryImpl.class);
     private ApplicationRepository  applicationRepository;
 
+    @Autowired
     public ApplicationServicesImpl(ApplicationRepository applicationRepository) {
         this.applicationRepository = applicationRepository;
     }
     
     @Override
-    public Optional<List<Application>> findAll() {
+    public List<Application> findAll() {
         Optional<List<Application>> optionalApps = this.applicationRepository.findAll();
-        return optionalApps;
+        return optionalApps.get();
     }
 
     @Override
