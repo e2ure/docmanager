@@ -11,6 +11,7 @@ import cr.co.DocManager.db.entities.Application;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,15 +22,17 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author SOIN
  */
 @Controller
-public class ApplicationsController{
-    private static final Log log = LogFactory.getLog(cr.co.DocManager.microservices.controllers.ApplicationsController.class);
+public class ApplicationsViewController{
+    private static final Log log = LogFactory.getLog(ApplicationsViewController.class);
  
+    
     private final ApplicationService applicationService;
     
     
     private Application application;
-
-    public ApplicationsController(ApplicationService applicationService) {
+    
+    @Autowired
+    public ApplicationsViewController(ApplicationService applicationService) {
         this.applicationService = applicationService;
     }
     

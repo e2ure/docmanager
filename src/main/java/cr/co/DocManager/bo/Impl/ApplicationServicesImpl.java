@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author SOIN
  */
-@Service("applicationServices")
+@Service("applicationService")
 @Transactional
 public class ApplicationServicesImpl implements ApplicationService{
     private static final Log log = LogFactory.getLog(ApplicationRepositoryImpl.class);
