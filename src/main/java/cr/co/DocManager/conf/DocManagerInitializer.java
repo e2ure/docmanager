@@ -11,13 +11,29 @@ import javax.servlet.ServletRegistration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
  *
  * @author SOIN
  */
-public class DocManagerInitializer implements WebApplicationInitializer{
+public class DocManagerInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
+
     @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return null;
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{AppConfig.class};
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/DocManager"};
+    }
+    /*@Override
     public void onStartup(ServletContext container) throws ServletException {
 
             AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
@@ -27,7 +43,7 @@ public class DocManagerInitializer implements WebApplicationInitializer{
             ServletRegistration.Dynamic servlet = container.addServlet(
                             "dispatcher", new DispatcherServlet(ctx));
             servlet.setLoadOnStartup(1);
-            servlet.addMapping("/");
+            servlet.addMapping("/DocManager");
     }
-    
+    */
 }
