@@ -5,15 +5,12 @@
  */
 package cr.co.DocManager.view.controllers;
 
-import cr.co.DocManager.bo.ApplicationService;
-import cr.co.DocManager.db.entities.Application;
-import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -24,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class GeneralViewController {
     private static final Log log = LogFactory.getLog(ApplicationsViewController.class);
     
-    @GetMapping("/")
+    @RequestMapping(value = {"/","/index"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String getApplications(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model){
         /*List<Application> apps=applicationService.findAll();
         model.addAttribute("applications",apps);*/

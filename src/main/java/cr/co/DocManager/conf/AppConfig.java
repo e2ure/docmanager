@@ -34,7 +34,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "cr.co.DocManager")
+@ComponentScan(basePackages = "cr.co.DocManager.*")
 public class AppConfig implements WebMvcConfigurer{
     /*@Resource(name = "mongodb/MyMongoClient")
     MongoClient mongoClient;*/
@@ -42,7 +42,7 @@ public class AppConfig implements WebMvcConfigurer{
     Context initCtx;
     
     @Autowired
-   private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext;
 
     public AppConfig() throws NamingException {
         this.initCtx = new InitialContext();
@@ -78,7 +78,7 @@ public class AppConfig implements WebMvcConfigurer{
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/Applications/");
+        templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
         return templateResolver;
     }
@@ -103,4 +103,12 @@ public class AppConfig implements WebMvcConfigurer{
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
+    
+    //3. Registering ThymeleafViewResolver
+    /*@Bean
+    public ViewResolver viewResolver(){
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine());
+        return viewResolver;
+    }*/
 }
