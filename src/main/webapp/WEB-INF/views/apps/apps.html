@@ -18,8 +18,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="product : ${applications}">
-                                <td><a th:text="${product.name}" ></a></td>
+                            <tr th:each="app : ${applications}">
+                                <td><a th:text="${app.name}" ></a></td>
 <!--                                <td><a th:text="${product.prodName}" th:href="@{'/show/' + ${product.id}}"></a></td>
                                 <td th:text="${product.prodDesc}"></td>
                                 <td th:text="${product.prodPrice}"></td>-->

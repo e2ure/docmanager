@@ -44,6 +44,6 @@ public class ApplicationsViewController{
         model.addAttribute("applications",apps);
         /*log.info("Get allUsers");
         return ResponseEntity.ok(applicationService.findAll());*/
-        return "apps2";
+        return "apps/apps";
     }
 }

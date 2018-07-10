@@ -32,7 +32,7 @@ public class ApplicationRepositoryImpl implements ApplicationRepository{
     
     @Override
     public Optional<List<Application>> findAll() {
-        List<Application> applications = this.mongoOperations.find(new Query(), Application.class);
+        List<Application> applications = this.mongoOperations.findAll(Application.class,"applications");
         Optional<List<Application>> optionalApplications = Optional.ofNullable(applications);
         return optionalApplications;
     }

@@ -1,6 +1,8 @@
 package cr.co.DocManager.db.entities;
 
 import java.io.Serializable;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,8 +14,10 @@ import java.io.Serializable;
  *
  * @author SOIN
  */
+@Document(collection = "applications")
 public class Application implements Serializable{
-    private String objId;
+    @Id
+    private String _id;
     private int appId;
     private String name;
 
@@ -21,11 +25,11 @@ public class Application implements Serializable{
     }
 
     public String getObjId() {
-        return objId;
+        return _id;
     }
 
     public void setObjId(String objId) {
-        this.objId = objId;
+        this._id = objId;
     }
 
     public int getAppId() {
