@@ -1,9 +1,32 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html  xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Product List</title>
+        <th:block th:replace="templates/DocManager/head"></th:block>
     </head>
-    <body>
+    <body class="theme-red">
+        <th:block th:replace="templates/DocManager/top"></th:block>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="block-header">
+                    <h2>DASHBOARD</h2>
+                </div>
+
+                <!-- Widgets -->
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-pink hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">playlist_add_check</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">NEW TASKS</div>
+                                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <div layout:fragment="content" class="row">
             <div class="col-xs-8 col-md-8">
                 <h3>
@@ -29,5 +52,7 @@
                 </div>
             </div>
         </div>
+        
+        <th:block th:replace="templates/DocManager/footer"></th:block>
     </body>
 </html>

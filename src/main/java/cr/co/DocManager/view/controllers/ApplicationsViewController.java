@@ -39,11 +39,20 @@ public class ApplicationsViewController{
     }
     
     @RequestMapping(value = {"/apps"},method = {RequestMethod.GET, RequestMethod.POST})
-    public String getApplications(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model){
+    public String getApplicationsList(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model){
         List<Application> apps=applicationService.findAll();
         model.addAttribute("applications",apps);
         /*log.info("Get allUsers");
         return ResponseEntity.ok(applicationService.findAll());*/
         return "apps/apps";
+    }
+    
+    @RequestMapping(value = {"/apps/new"},method = {RequestMethod.GET, RequestMethod.POST})
+    public String newApplications(@RequestParam(name="newApp", required=false, defaultValue="true") String newApp, Model model){
+        //List<Application> apps=applicationService.findAll();
+        model.addAttribute("newApp",newApp.equals("true"));
+        /*log.info("Get allUsers");
+        return ResponseEntity.ok(applicationService.findAll());*/
+        return "apps/editApp";
     }
 }

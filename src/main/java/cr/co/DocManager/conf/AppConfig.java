@@ -7,21 +7,32 @@ package cr.co.DocManager.conf;
 
 import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
+import java.util.Locale;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.thymeleaf.spring5.SpringTemplateEngine;
@@ -35,7 +46,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "cr.co.DocManager.*")
-public class AppConfig implements WebMvcConfigurer{
+public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     /*@Resource(name = "mongodb/MyMongoClient")
     MongoClient mongoClient;*/
     MongoClient db;
@@ -50,22 +61,6 @@ public class AppConfig implements WebMvcConfigurer{
          System.out.println("cr.co.DocManager.conf.AppConfig.<init>()");
     }
     
-    /*@Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/");
-        viewResolver.setSuffix(".html");
- 
-        return viewResolver;
-    }*/
-    
-    /*@Bean
-    public MongoDbFactory mongoDbFactory() throws UnknownHostException{
-        return new SimpleMongoDbFactory(new MongoClient ("localhost", 27017), "test");
-    }*/
-  
     @Bean
     public MongoOperations mongoOperations() throws UnknownHostException{
         return new MongoTemplate(new SimpleMongoDbFactory(db,"DocManager"));
@@ -104,11 +99,44 @@ public class AppConfig implements WebMvcConfigurer{
         registry.viewResolver(resolver);
     }
     
-    //3. Registering ThymeleafViewResolver
-    /*@Bean
-    public ViewResolver viewResolver(){
-        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-        viewResolver.setTemplateEngine(templateEngine());
-        return viewResolver;
-    }*/
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext ac) throws BeansException {
+        this.applicationContext=ac;
+    }
+    
+    @Bean
+    public LocaleResolver localeResolver() {
+        /*SessionLocaleResolver slr = new SessionLocaleResolver();
+        slr.setDefaultLocale(Locale.US);*/
+        CookieLocaleResolver slr = new CookieLocaleResolver();
+        slr.setDefaultLocale(new Locale("es"));
+        slr.setCookieName("myLocaleCookie");
+        slr.setCookieMaxAge(4800);
+        return slr;
+    }
+ 
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
+    }
+ 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeChangeInterceptor());
+    }
+    
+    @Bean
+    public MessageSource messageSource() {
+    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+    messageSource.setBasename("/resources/lang/messages");
+    messageSource.setDefaultEncoding("UTF-8");
+    return messageSource;
+} 
 }
