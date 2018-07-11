@@ -87,14 +87,14 @@
                 <li>
                     <a class="menu-toggle">
                         <i class="material-icons">text_fields</i>
-                        <span>Applications</span>
+                        <span th:text="#{applications}">Applications</span>
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a th:href='@{/apps/new}' th:text="#{new}#{application}">New Application</a>
+                            <a th:href='@{/apps/new}' th:text="#{new_application}">New Application</a>
                         </li>
                         <li>
-                            <a th:href='@{/apps}'>View Application</a>
+                            <a th:href='@{/apps}' th:text="#{view_applications}">View Application</a>
                         </li>
                         
                     </ul>
