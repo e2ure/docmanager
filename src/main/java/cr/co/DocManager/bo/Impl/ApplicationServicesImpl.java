@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,7 +42,7 @@ public class ApplicationServicesImpl implements ApplicationService{
 
     @Override
     public Application saveApplication(Application application) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.applicationRepository.saveApplication(application);
     }
 
     @Override
@@ -52,5 +53,25 @@ public class ApplicationServicesImpl implements ApplicationService{
     @Override
     public void deleteApplication(String appId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Application findById(String _id) {
+        return this.applicationRepository.findById(_id);
+    }
+
+    @Override
+    public Application findByObjectId(ObjectId _id) {
+        return this.applicationRepository.findById(_id);
+    }
+
+    @Override
+    public Application findByKey(String key, Object value) {
+        return this.applicationRepository.findByKey(key, value);
+    }
+
+    @Override
+    public Application findByObjectId(String _id) {
+        return this.applicationRepository.findById(new ObjectId(_id));
     }
 }

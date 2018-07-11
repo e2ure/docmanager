@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,12 +49,27 @@ public class ApplicationsViewController{
         return "apps/apps";
     }
     
-    @RequestMapping(value = {"/apps/new"},method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = {"/apps/new"},method = {RequestMethod.GET})
     public String newApplications(@RequestParam(name="newApp", required=false, defaultValue="true") String newApp, Model model){
         //List<Application> apps=applicationService.findAll();
         model.addAttribute("newApp",newApp.equals("true"));
-        /*log.info("Get allUsers");
-        return ResponseEntity.ok(applicationService.findAll());*/
+        model.addAttribute("app",new Application());
+        return "apps/editApp";
+    }
+    
+    @RequestMapping(value = {"/apps/new"},method = {RequestMethod.POST})
+    public String saveApplications(@ModelAttribute (name="newApp") String newApp,@ModelAttribute (name="app") Application app, Model model){
+        //List<Application> apps=applicationService.findAll();
+        applicationService.saveApplication(app);
+        return "index";
+    }
+    
+    @RequestMapping(value = {"/apps/edit/{id}"},method = {RequestMethod.GET})
+    public String editApplications(@PathVariable(name="id", required=true) String id, Model model){
+        //List<Application> apps=applicationService.findAll();
+        this.application = this.applicationService.findByObjectId(id);
+        model.addAttribute("newApp",false);
+        model.addAttribute("app",application);
         return "apps/editApp";
     }
 }

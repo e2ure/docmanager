@@ -7,6 +7,7 @@ package cr.co.DocManager.bo;
 
 import cr.co.DocManager.db.entities.Application;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -20,4 +21,12 @@ public interface ApplicationService {
     public void updateApplication(Application application);
 
     public void deleteApplication(String appId);
+    
+    public Application findById(String _id);
+    
+    public Application findByObjectId(ObjectId _id);
+    
+    public Application findByObjectId(String _id);
+    
+    public Application findByKey(String key, Object value);
 }

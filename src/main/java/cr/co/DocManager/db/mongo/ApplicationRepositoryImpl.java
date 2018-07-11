@@ -9,8 +9,10 @@ import cr.co.DocManager.db.ApplicationRepository;
 import cr.co.DocManager.db.entities.Application;
 import java.util.List;
 import java.util.Optional;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
@@ -39,7 +41,8 @@ public class ApplicationRepositoryImpl implements ApplicationRepository{
 
     @Override
     public Application saveApplication(Application application) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.mongoOperations.save(application);
+        return application;
     }
 
     @Override
@@ -50,6 +53,25 @@ public class ApplicationRepositoryImpl implements ApplicationRepository{
     @Override
     public void deleteApplication(String appId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Application findById(String _id) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("appId").is(_id));
+        return mongoOperations.findOne(query, Application.class);
+    }
+
+    @Override
+    public Application findById(ObjectId _id) {
+        return this.mongoOperations.findById(_id, Application.class);
+    }
+
+    @Override
+    public Application findByKey(String key, Object value) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where(key).is(value));
+        return mongoOperations.findOne(query, Application.class);
     }
     
 }

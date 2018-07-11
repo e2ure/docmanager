@@ -8,7 +8,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="block-header">
-                    <h2>DASHBOARD</h2>
+                    <h2 th:text='#{application}'>DASHBOARD</h2>
                 </div>
 
                 <div class="row clearfix">
@@ -30,40 +30,24 @@
                                 </ul>
                             </div>
                             <div class="body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" th:object='${app}' action="/apps/new" th:action='@{/apps/new}' method="post">
+                                    <input th:type="hidden" name="id" th:field="*{id}" />
                                     <div class="row clearfix">
                                         <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                            <label for="email_address_2">Email Address</label>
+                                            <label for="appName" th:text='#{name}'>Name</label>
                                         </div>
                                         <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" id="email_address_2" class="form-control" placeholder="Enter your email address">
+                                                    <input type="text" id="appName" name='appName' class="form-control" placeholder="" th:field='*{name}'>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row clearfix">
-                                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                                            <label for="password_2">Password</label>
-                                        </div>
-                                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <input type="password" id="password_2" class="form-control" placeholder="Enter your password">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                     <div class="row clearfix">
                                         <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                            <input type="checkbox" id="remember_me_3" class="filled-in">
-                                            <label for="remember_me_3">Remember Me</label>
-                                        </div>
-                                    </div>
-                                    <div class="row clearfix">
-                                        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                                            <button type="button" class="btn btn-primary m-t-15 waves-effect">LOGIN</button>
+                                            <button type="submit" class="btn btn-primary m-t-15 waves-effect" 
+                                                    th:text="${newApp? #messages.msg('save') : #messages.msg('update')}">Save</button>
                                         </div>
                                     </div>
                                 </form>

@@ -8,51 +8,48 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="block-header">
-                    <h2>DASHBOARD</h2>
+                    <h2 th:text='#{applications}'>Applications</h2>
                 </div>
 
-                <!-- Widgets -->
                 <div class="row clearfix">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box bg-pink hover-expand-effect">
-                            <div class="icon">
-                                <i class="material-icons">playlist_add_check</i>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2 th:text="#{applications}">New Applications</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">more_vert</i>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right">
+                                            <li><a href="" th:href='@{/apps/new}' th:text="#{new_application}" class=" waves-effect waves-block">Action</a></li>
+<!--                                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                            <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>-->
+                                        </ul>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="content">
-                                <div class="text">NEW TASKS</div>
-                                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                            <div class="body table-responsive">
+                                <table class="table table">
+                                    <thead>
+                                        <th th:text='#{name}'>Name</th>
+                                        <th th:text='#{actions}'>Actions</th>
+                                    </thead>
+                                    <tbody>
+                                        <th:block th:each="app : ${applications}">
+                                            <tr>
+                                                <td th:text='${app.name}'></td>
+                                                <td> <a href='/apps/edit/' th:href='@{/apps/edit/__${app.id}__}'><id class="material-icons">edit</id></a></td>
+                                            </tr>
+                                        </th:block>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <div layout:fragment="content" class="row">
-            <div class="col-xs-8 col-md-8">
-                <h3>
-                    <a href="/create" class="btn btn-primary"><span class="glyphicon glyphicon-plus-sign"></span> Product</a>
-                </h3>
-                <h2>Product List</h2>
-                <div class="table-responsive">
-                    <table class="table" id="product-table">
-                        <thead>
-                            <tr>
-                                <th>Product Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="app : ${applications}">
-                                <td><a th:text="${app.name}" ></a></td>
-<!--                                <td><a th:text="${product.prodName}" th:href="@{'/show/' + ${product.id}}"></a></td>
-                                <td th:text="${product.prodDesc}"></td>
-                                <td th:text="${product.prodPrice}"></td>-->
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        
-        <th:block th:replace="templates/DocManager/footer"></th:block>
+    <th:block th:replace="templates/DocManager/footer"></th:block>
     </body>
 </html>

@@ -1,6 +1,9 @@
 package cr.co.DocManager.db.entities;
 
 import java.io.Serializable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,19 +20,21 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "applications")
 public class Application implements Serializable{
     @Id
-    private String _id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private ObjectId _id;
     private int appId;
     private String name;
 
     public Application() {
+        this._id= new ObjectId();
     }
 
-    public String getObjId() {
+    public ObjectId getId() {
         return _id;
     }
 
-    public void setObjId(String objId) {
-        this._id = objId;
+    public void setId(ObjectId _id) {
+        this._id = _id;
     }
 
     public int getAppId() {
