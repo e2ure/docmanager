@@ -43,7 +43,9 @@
                 <li><a href="javascript:void(0);" class="js-search" data-close="true"><i class="material-icons">search</i></a></li>
                 <!-- #END# Call Search -->
                 <!-- Notifications -->
-                <li class="pull-right"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
+                <li class="pull-right">
+                    <a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a>
+                </li>
             </ul>
         </div>
     </div>
@@ -100,6 +102,37 @@
                     </ul>
                 </li>
             </ul>
+        </div>
+    </aside>
+    <!-- #END# Left Sidebar -->
+    <!-- Right Sidebar -->
+    <aside id="rightsidebar" class="right-sidebar">
+        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+            <li role="presentation" class="active"><a href="#skins" data-toggle="tab">SKINS</a></li>
+            <li role="presentation"><a href="#settings" data-toggle="tab"><i class="material-icons">language</i>SETTINGS</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active in active" id="skins">
+                <ul class="demo-choose-skin">
+                    <li data-theme="red" class="active">
+                        <div class="red"></div>
+                        <span>Red</span>
+                    </li>
+                </ul>                
+            </div>
+            <div role="tabpanel" class="tab-pane fade in active in active" id="settings">
+                <div class="demo-setting">
+                    <p th:text="${#strings.toUpperCase(#messages.msg('languaje'))}"><span><i class="material-icons">language</i></span> Language </p>
+                    <ul class="setting-list">
+                        <li>
+                            <a href="" th:href="@{/?lang=es}"><span th:text="#{es}">Spanish</span></a>
+                        </li>
+                        <li>
+                            <a href="" th:href="@{/?lang=en}"><span th:text="#{en}">English</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </aside>
 </section>
