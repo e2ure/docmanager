@@ -5,10 +5,22 @@
  */
 package cr.co.DocManager.db.mongo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author SOIN
  */
+@Component
 public class MongoAcces {
+    @Autowired
+    private MongoOperations mongoOperations;
+    
+    public MongoAcces(MongoOperations mongoOperations) {
+        this.mongoOperations = mongoOperations;
+    }
+    
     
 }

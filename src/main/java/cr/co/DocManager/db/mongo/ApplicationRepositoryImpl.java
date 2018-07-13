@@ -6,6 +6,7 @@
 package cr.co.DocManager.db.mongo;
 
 import cr.co.DocManager.db.ApplicationRepository;
+import cr.co.DocManager.db.SequenceIdRepository;
 import cr.co.DocManager.db.entities.Application;
 import java.util.List;
 import java.util.Optional;
@@ -23,13 +24,19 @@ import org.springframework.util.Assert;
  */
 @Repository
 public class ApplicationRepositoryImpl implements ApplicationRepository{
+    private static final String APPLICATION_SEQ_KEY = "applications";
+    
     @Autowired
     private final MongoOperations mongoOperations;
     
     @Autowired
-    public ApplicationRepositoryImpl(MongoOperations mongoOperations) {
+    private final SequenceIdRepository sequenceIdRepository;
+    
+    @Autowired
+    public ApplicationRepositoryImpl(MongoOperations mongoOperations,SequenceIdRepository sqIdRepository) {
         Assert.notNull(mongoOperations);
         this.mongoOperations = mongoOperations;
+        this.sequenceIdRepository=sqIdRepository;
     }
     
     @Override
@@ -41,6 +48,9 @@ public class ApplicationRepositoryImpl implements ApplicationRepository{
 
     @Override
     public Application saveApplication(Application application) {
+        if(application.getAppId()==0){
+            application.setAppId(this.sequenceIdRepository.getNextValue(APPLICATION_SEQ_KEY));
+        }
         this.mongoOperations.save(application);
         return application;
     }
