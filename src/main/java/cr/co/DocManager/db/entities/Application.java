@@ -24,9 +24,11 @@ public class Application implements Serializable{
     private ObjectId _id;
     private int appId;
     private String name;
+    private ApplicationSchema applicationSchema;
 
     public Application() {
         this._id= new ObjectId();
+        this.applicationSchema = new ApplicationSchema();
     }
 
     public ObjectId getId() {
@@ -51,6 +53,14 @@ public class Application implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ApplicationSchema getApplicationSchema() {
+        return applicationSchema;
+    }
+
+    public void setApplicationSchema(ApplicationSchema applicationSchema) {
+        this.applicationSchema = applicationSchema;
     }
     
 }

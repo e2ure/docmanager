@@ -23,7 +23,7 @@ public interface ApplicationRepository {
 
     public void deleteApplication(String appId);
     
-    public Application findById(String _id);
+    public Application findById(int _id);
     
     public Application findById(ObjectId _id);
     

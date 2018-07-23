@@ -56,7 +56,7 @@ public class ApplicationServicesImpl implements ApplicationService{
     }
 
     @Override
-    public Application findById(String _id) {
+    public Application findById(int _id) {
         return this.applicationRepository.findById(_id);
     }
 

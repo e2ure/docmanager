@@ -66,7 +66,7 @@ public class ApplicationRepositoryImpl implements ApplicationRepository{
     }
 
     @Override
-    public Application findById(String _id) {
+    public Application findById(int _id) {
         Query query = new Query();
         query.addCriteria(Criteria.where("appId").is(_id));
         return mongoOperations.findOne(query, Application.class);
