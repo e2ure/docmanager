@@ -61,7 +61,7 @@ public class ApplicationsViewController{
     public String saveApplications(@ModelAttribute (name="newApp") String newApp,@ModelAttribute (name="app") Application app, Model model){
         //List<Application> apps=applicationService.findAll();
         applicationService.saveApplication(app);
-        return "index";
+        return "/apps";
     }
     
     @RequestMapping(value = {"/apps/edit/{id}"},method = {RequestMethod.GET})

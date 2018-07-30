@@ -40,10 +40,7 @@
                                         <th:block th:each="app : ${applications}">
                                             <tr>
                                                 <td th:text='${app.name}'></td>
-                                                <td class="col-md-3"> 
-                                                    <a href='/apps/edit/' th:href='@{/apps/edit/__${app.id}__}'><id class="material-icons">edit</id></a>
-                                                    <a href='/apps/edit/' th:href='@{/apps/edit/__${app.id}__}'><id class="material-icons">edit</id></a>
-                                                </td>
+                                                <td> <a href='/apps/edit/' th:href='@{/apps/edit/__${app.id}__}'><id class="material-icons">edit</id></a></td>
                                             </tr>
                                         </th:block>
                                     </tbody>
